@@ -41,9 +41,9 @@ async function handler(ctx) {
     await page.setRequestInterception(true);
     // 仅允许某些类型的请求
     page.on('request', (request) => {
-        // request.continue();
+        request.continue();
         // 在这次例子，我们只允许 HTML 请求
-        request.resourceType() === 'document' || request.resourceType() === 'script' ? request.continue() : request.abort();
+        // request.resourceType() === 'document' || request.resourceType() === 'script' ? request.continue() : request.abort();
     });
     // 访问目标链接
     const link = `https://www.cnipa.gov.cn/col/${column}`;
