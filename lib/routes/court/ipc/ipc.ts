@@ -38,6 +38,7 @@ async function handler(ctx) {
     const $ = load(response);
     const baseUrl = 'https://ipc.court.gov.cn/';
 
+    const title = $('div.right .title h2 a');
     const list = $('div.listing ul > li')
         .toArray()
         .map((item) => {
@@ -64,7 +65,7 @@ async function handler(ctx) {
     );
 
     return {
-        title: '高法知产裁判',
+        title: `高法知产庭-${title.text()}`,
         link: `https://ipc.court.gov.cn/zh-cn/news/more-5-${nav}.html`,
         item: items,
     };
