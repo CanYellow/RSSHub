@@ -32,13 +32,13 @@ async function handler(ctx) {
     const { column } = ctx.req.param();
 
     const response = await ofetch(`https://www.cnipa.gov.cn/col/${column}/index.html`);
-    let $ = load(response, { scriptingEnabled: false, xml: true });
+    const $ = load(response, { scriptingEnabled: false, xml: true });
 
     const title = $('ul.df-tit li:nth-child(2)');
     const data = $('script[type=text/xml]');
 
-    let $ = load(data.text());
-    const list = $('li')
+    const subhtml = load(data.text());
+    const list = subhtml('li')
         .toArray()
         .map((item) => {
             item = $(item);
